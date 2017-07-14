@@ -26,6 +26,7 @@ let minus = document.querySelector('#minus');
 let plus = document.querySelector('#plus');
 let equals = document.querySelector('#equals');
 let dot = document.querySelector('#dot');
+let audio = document.querySelector('audio');
 
 function updateAnswer() {
 
@@ -50,6 +51,10 @@ function setZero() {
 container.addEventListener('click', function(evt) {
 
   let target = evt.target;
+
+  if (target.classList.contains('click-sound')) {
+    audio.play();
+  }
 
   if (target.classList.contains('number')) {
 
