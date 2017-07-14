@@ -29,6 +29,16 @@ function updateAnswer() {
   answer.textContent += keyStrk;
 }
 
+function setZero() {
+  total = 0;
+  ansStr = '';
+  value = [];
+  operators = [];
+  numCount = 0;
+  operatorCount = 0;
+  answer.textContent = ansStr;
+}
+
 container.addEventListener('click', function(evt) {
   let target = evt.target;
 
@@ -45,6 +55,8 @@ container.addEventListener('click', function(evt) {
     operators[operatorCount] = target.innerHTML;
     operatorCount++;
 
+  } else if (target.classList.contains('clear')) {
+    setZero();
   } else if (target.classList.contains('equals')) {
     value[numCount] = Number(ansStr);
 
@@ -124,5 +136,6 @@ container.addEventListener('click', function(evt) {
       }
     }
     calculate();
+    answer.textContent = total;
   }
 });
