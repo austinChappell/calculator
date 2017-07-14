@@ -2,11 +2,13 @@ body {
   text-align: center;
   color: white;
   font-family: sans-serif;
+  background-color: lightgray;
 }
 
 #answer {
   text-align: right;
   padding: 0 30px;
+  background-color: #222B25;
 }
 
 .container {
@@ -16,6 +18,9 @@ body {
   max-width: 380px;
   margin: 30px auto;
   justify-content: center;
+  box-shadow: 1px 1px 2px black;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 h2 {
@@ -31,10 +36,17 @@ h2 {
   flex-shrink: 1;
   border: 1px solid #A9D7A3;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .operator-btn {
   background-color: #82C276;
+  color: #28332B;
+}
+
+.button:hover {
+  background-color: #3E7333;
+  color: #FFF;
 }
 
 #answer, #equals {
@@ -42,5 +54,10 @@ h2 {
 }
 
 #left, #right {
+  flex-basis: 37%;
+  flex-grow: 1;
+}
+
+#zero {
   flex-basis: 50%;
 }
