@@ -62,6 +62,14 @@ container.addEventListener('click', function(evt) {
     operators[operatorCount] = target.innerHTML;
     operatorCount++;
 
+  } else if (target.classList.contains('sq-root')) {
+
+    value[numCount] = Number(ansStr);
+    ansStr = '';
+    answer.textContent += target.innerHTML;
+    operators[operatorCount] = target.innerHTML;
+    operatorCount++;
+
   } else if (target.classList.contains('clear')) {
 
     setZero();
@@ -72,10 +80,25 @@ container.addEventListener('click', function(evt) {
 
     function calculate() {
 
-      let timesIndex = operators.indexOf('X');
+      let timesIndex = operators.indexOf('x');
       let divideIndex = operators.indexOf('/');
       let addIndex = operators.indexOf('+');
       let minusIndex = operators.indexOf('-');
+      let moduloIndex = operators.indexOf('%');
+      let sqRootIndex = operators.indexOf("\u221A");
+
+      function sqRoot() {
+
+        let product = Math.sqrt(value[sqRootIndex]);
+        total = product;
+        value[sqRootIndex] = product;
+        operators.splice(sqRootIndex, 1);
+        sqRootIndex = operators.indexOf("\u221A");
+        if (sqRootIndex !== -1) {
+          sqRoot();
+        }
+
+      }
 
       function multiply() {
 
@@ -109,6 +132,24 @@ container.addEventListener('click', function(evt) {
           value[divideIndex] = product;
           value.splice(divideIndex + 1, 1);
           operators.splice(divideIndex, 1);
+
+        }
+
+      }
+
+      function modulo() {
+
+        let remainder = value[moduloIndex] % value[moduloIndex + 1];
+        if (value.length === 2) {
+          total = remainder;
+          value[moduloIndex] = remainder;
+          value.splice(moduloIndex + 1, 1);
+
+        } else {
+
+          value[moduloIndex] = remainder;
+          value.splice(moduloIndex + 1, 1);
+          operators.splice(moduloIndex, 1);
 
         }
 
@@ -152,7 +193,33 @@ container.addEventListener('click', function(evt) {
 
       }
 
-      if (timesIndex !== -1) {
+      if (sqRootIndex !== -1) {
+        sqRoot();
+      }
+
+      let isModuloBeforeTimes;
+      let isModuloBeforeDivide;
+      let isModuloFirst;
+
+      if ((moduloIndex !== -1 && moduloIndex < timesIndex) || (moduloIndex !== -1 && timesIndex === -1)) {
+        isModuloBeforeTimes = true;
+      }
+
+      if ((moduloIndex !== -1 && moduloIndex < divideIndex) || (moduloIndex !== -1 && divideIndex === -1)) {
+        isModuloBeforeDivide = true;
+      }
+
+      if (isModuloBeforeTimes && isModuloBeforeDivide) {
+        isModuloFirst = true;
+      } else {
+        isModuloFirst = false;
+      }
+
+      if (isModuloFirst === true) {
+
+        modulo();
+
+      } else if (timesIndex !== -1) {
 
         multiply();
 
