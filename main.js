@@ -4,6 +4,8 @@ let value = [];
 let operators = [];
 let numCount = 0;
 let operatorCount = 0;
+let allTotals = [];
+let allTotalsCount = 0;
 
 let container = document.querySelector('.container');
 let one = document.querySelector('#one');
@@ -40,6 +42,8 @@ function setZero() {
   numCount = 0;
   operatorCount = 0;
   answer.textContent = ansStr;
+  let allTotals = [];
+  let allTotalsCount = 0;
 
 }
 
@@ -73,6 +77,20 @@ container.addEventListener('click', function(evt) {
   } else if (target.classList.contains('clear')) {
 
     setZero();
+
+  } else if (target.classList.contains('left-arrow')) {
+
+    if (allTotalsCount > 0) {
+      allTotalsCount--;
+    }
+    answer.textContent = allTotals[allTotalsCount];
+
+  } else if (target.classList.contains('right-arrow')) {
+
+    if (allTotalsCount < allTotals.length) {
+      allTotalsCount++;
+    }
+    answer.textContent = allTotals[allTotalsCount];
 
   } else if (target.classList.contains('equals')) {
 
@@ -250,12 +268,16 @@ container.addEventListener('click', function(evt) {
     }
 
     calculate();
+    total = parseFloat(total.toFixed(6));
     answer.textContent = total;
     value.splice(2, 1);
     operatorCount = 0;
     operators = [];
     ansStr = total;
     numCount = 0;
+
+    allTotals.push(total);
+    allTotalsCount++;
 
   }
 

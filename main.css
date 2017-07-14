@@ -40,3 +40,7 @@ h2 {
 #answer, #equals {
   flex-basis: 75%;
 }
+
+#left, #right {
+  flex-basis: 50%;
+}
