@@ -18,9 +18,11 @@ body {
   max-width: 380px;
   margin: 30px auto;
   justify-content: center;
-  box-shadow: 1px 1px 2px black;
-  border: 2px solid black;
+  box-shadow: 1px 1px 2px #615B57;
+  border: 1px solid #615B57;
   border-radius: 5px;
+  padding: 20px;
+  background-color: #DB7F4B;
 }
 
 h2 {
