@@ -6,6 +6,7 @@ let numCount = 0;
 let operatorCount = 0;
 let allTotals = [];
 let allTotalsCount = 0;
+let subTotal;
 
 let container = document.querySelector('.container');
 let one = document.querySelector('#one');
@@ -28,8 +29,42 @@ let equals = document.querySelector('#equals');
 let dot = document.querySelector('#dot');
 let audio = document.querySelector('audio');
 
-function updateAnswer() {
+function sqRoot(index) {
 
+  subTotal = Math.sqrt(value[index]);
+  total = subTotal;
+  value[index] = subTotal;
+  operators.splice(index, 1);
+  index = operators.indexOf("\u221A");
+  if (index !== -1) {
+    sqRoot();
+  }
+
+}
+
+function megafunction(index, operatorFunc) {
+
+  subTotal = operatorFunc(value[index], value[index + 1]);
+  if (value.length === 2) {
+
+    total = subTotal;
+    value[index] = subTotal;
+    value.splice(index + 1, 1);
+
+  } else {
+
+    value[index] = subTotal;
+    value.splice(index + 1, 1);
+    operators.splice(index, 1);
+
+  }
+
+}
+
+function updateAnswer(targ) {
+
+  keyStrk = targ.innerHTML;
+  ansStr += keyStrk;
   answer.textContent += keyStrk;
 
 }
@@ -43,9 +78,17 @@ function setZero() {
   numCount = 0;
   operatorCount = 0;
   answer.textContent = ansStr;
-  let allTotals = [];
-  let allTotalsCount = 0;
+  allTotals = [];
+  allTotalsCount = 0;
 
+}
+
+function createValue(targ) {
+  value[numCount] = Number(ansStr);
+  ansStr = '';
+  answer.textContent += targ.innerHTML;
+  operators[operatorCount] = targ.innerHTML;
+  operatorCount++;
 }
 
 
@@ -59,26 +102,16 @@ container.addEventListener('click', function(evt) {
 
   if (target.classList.contains('number')) {
 
-    keyStrk = target.innerHTML;
-    ansStr += keyStrk;
-    updateAnswer();
+    updateAnswer(target);
 
   } else if (target.classList.contains('operator')) {
 
-    value[numCount] = Number(ansStr);
+    function createValue(targ) {
     numCount++;
-    ansStr = '';
-    answer.textContent += target.innerHTML;
-    operators[operatorCount] = target.innerHTML;
-    operatorCount++;
 
   } else if (target.classList.contains('sq-root')) {
 
-    value[numCount] = Number(ansStr);
-    ansStr = '';
-    answer.textContent += target.innerHTML;
-    operators[operatorCount] = target.innerHTML;
-    operatorCount++;
+    function createValue(target) {
 
   } else if (target.classList.contains('clear')) {
 
@@ -111,40 +144,6 @@ container.addEventListener('click', function(evt) {
       let moduloIndex = operators.indexOf('%');
       let sqRootIndex = operators.indexOf("\u221A");
 
-      function sqRoot(sqRootIndex) {
-
-        let product = Math.sqrt(value[sqRootIndex]);
-        total = product;
-        value[sqRootIndex] = product;
-        operators.splice(sqRootIndex, 1);
-        sqRootIndex = operators.indexOf("\u221A");
-        if (sqRootIndex !== -1) {
-          sqRoot();
-        }
-
-      }
-
-      function megafunction(index, operatorFunc) {
-
-        //let sum = value[index] - value[index + 1];
-        let sum = operatorFunc(value[index], value[index + 1]);
-        if (value.length === 2) {
-
-          total = sum;
-          value[index] = sum;
-          value.splice(index + 1, 1);
-
-        } else {
-
-          value[index] = sum;
-          value.splice(index + 1, 1);
-          operators.splice(index, 1);
-
-        }
-
-      }
-
-
       if (sqRootIndex !== -1) {
         sqRoot(sqRootIndex);
       }
@@ -166,6 +165,8 @@ container.addEventListener('click', function(evt) {
       } else {
         isModuloFirst = false;
       }
+
+      // Starting exeuting math problems
 
       if (isModuloFirst === true) {
 
