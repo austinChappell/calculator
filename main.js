@@ -37,7 +37,7 @@ function sqRoot(index) {
   operators.splice(index, 1);
   index = operators.indexOf("\u221A");
   if (index !== -1) {
-    sqRoot();
+    sqRoot(index);
   }
 
 }
@@ -106,12 +106,12 @@ container.addEventListener('click', function(evt) {
 
   } else if (target.classList.contains('operator')) {
 
-    function createValue(targ) {
-    numCount++;
+      createValue(target);
+      numCount++;
 
   } else if (target.classList.contains('sq-root')) {
 
-    function createValue(target) {
+      createValue(target);
 
   } else if (target.classList.contains('clear')) {
 
