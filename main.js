@@ -48,6 +48,7 @@ function setZero() {
 
 }
 
+
 container.addEventListener('click', function(evt) {
 
   let target = evt.target;
@@ -110,7 +111,7 @@ container.addEventListener('click', function(evt) {
       let moduloIndex = operators.indexOf('%');
       let sqRootIndex = operators.indexOf("\u221A");
 
-      function sqRoot() {
+      function sqRoot(sqRootIndex) {
 
         let product = Math.sqrt(value[sqRootIndex]);
         total = product;
@@ -123,101 +124,29 @@ container.addEventListener('click', function(evt) {
 
       }
 
-      function multiply() {
+      function megafunction(index, operatorFunc) {
 
-        let product = value[timesIndex] * value[timesIndex + 1];
-        if (value.length === 2) {
-
-          total = product;
-          value[timesIndex] = product;
-          value.splice(timesIndex + 1, 1);
-
-        } else {
-
-          value[timesIndex] = product;
-          value.splice(timesIndex + 1, 1);
-          operators.splice(timesIndex, 1);
-
-        }
-
-      }
-
-      function divide() {
-
-        let product = value[divideIndex] / value[divideIndex + 1];
-        if (value.length === 2) {
-          total = product;
-          value[divideIndex] = product;
-          value.splice(divideIndex + 1, 1);
-
-        } else {
-
-          value[divideIndex] = product;
-          value.splice(divideIndex + 1, 1);
-          operators.splice(divideIndex, 1);
-
-        }
-
-      }
-
-      function modulo() {
-
-        let remainder = value[moduloIndex] % value[moduloIndex + 1];
-        if (value.length === 2) {
-          total = remainder;
-          value[moduloIndex] = remainder;
-          value.splice(moduloIndex + 1, 1);
-
-        } else {
-
-          value[moduloIndex] = remainder;
-          value.splice(moduloIndex + 1, 1);
-          operators.splice(moduloIndex, 1);
-
-        }
-
-      }
-
-      function add() {
-
-        let sum = value[addIndex] + value[addIndex + 1];
+        //let sum = value[index] - value[index + 1];
+        let sum = operatorFunc(value[index], value[index + 1]);
         if (value.length === 2) {
 
           total = sum;
-          value[addIndex] = sum;
-          value.splice(addIndex + 1, 1);
+          value[index] = sum;
+          value.splice(index + 1, 1);
 
         } else {
 
-          value[addIndex] = sum;
-          value.splice(addIndex + 1, 1);
-          operators.splice(addIndex, 1);
+          value[index] = sum;
+          value.splice(index + 1, 1);
+          operators.splice(index, 1);
 
         }
 
       }
 
-      function subtract() {
-
-        let sum = value[minusIndex] - value[minusIndex + 1];
-        if (value.length === 2) {
-
-          total = sum;
-          value[minusIndex] = sum;
-          value.splice(minusIndex + 1, 1);
-
-        } else {
-
-          value[minusIndex] = sum;
-          value.splice(minusIndex + 1, 1);
-          operators.splice(minusIndex, 1);
-
-        }
-
-      }
 
       if (sqRootIndex !== -1) {
-        sqRoot();
+        sqRoot(sqRootIndex);
       }
 
       let isModuloBeforeTimes;
@@ -240,23 +169,23 @@ container.addEventListener('click', function(evt) {
 
       if (isModuloFirst === true) {
 
-        modulo();
+        megafunction(moduloIndex, (a, b) => a % b);
 
       } else if (timesIndex !== -1) {
 
-        multiply();
+        megafunction(timesIndex, (a, b) => a * b);
 
       } else if (divideIndex !== -1) {
 
-        divide();
+        megafunction(divideIndex, (a, b) => a / b);
 
       } else if (addIndex !== -1) {
 
-        add();
+        megafunction(addIndex, (a, b) => a + b);
 
       } else if (minusIndex !== -1) {
 
-        subtract();
+        megafunction(minusIndex, (a, b) => a - b);
 
       }
 
