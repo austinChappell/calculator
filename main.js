@@ -137,17 +137,17 @@ container.addEventListener('click', function(evt) {
 
     function calculate() {
 
-      let timesIndex = operators.indexOf('x');
-      let divideIndex = operators.indexOf('/');
-      let addIndex = operators.indexOf('+');
-      let minusIndex = operators.indexOf('-');
-      let moduloIndex = operators.indexOf('%');
       let sqRootIndex = operators.indexOf("\u221A");
 
       if (sqRootIndex !== -1) {
         sqRoot(sqRootIndex);
       }
 
+      let timesIndex = operators.indexOf('x');
+      let divideIndex = operators.indexOf('/');
+      let addIndex = operators.indexOf('+');
+      let minusIndex = operators.indexOf('-');
+      let moduloIndex = operators.indexOf('%');
       let isModuloBeforeTimes;
       let isModuloBeforeDivide;
       let isModuloFirst;
