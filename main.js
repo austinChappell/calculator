@@ -42,6 +42,7 @@ function sqRoot(index) {
 
 }
 
+// FUNCTION USED FOR ADDITION, SUBTRACTION, DIVISION, MULTIPLICATION, AND MODULO
 function megafunction(index, operatorFunc) {
 
   subTotal = operatorFunc(value[index], value[index + 1]);
@@ -61,6 +62,7 @@ function megafunction(index, operatorFunc) {
 
 }
 
+// UPDATE DISPLAY ON CALCULATOR
 function updateAnswer(targ) {
 
   keyStrk = targ.innerHTML;
@@ -69,6 +71,7 @@ function updateAnswer(targ) {
 
 }
 
+// RESET VALUES TO ZERO
 function setZero() {
 
   total = 0;
@@ -83,6 +86,7 @@ function setZero() {
 
 }
 
+// ADDS MOST RECENT NUMBERS TO VALUE ARRAY, AND ADDS OPERATOR ITEM TO OPERATOR ARRAY
 function createValue(targ) {
   value[numCount] = Number(ansStr);
   ansStr = '';
@@ -91,32 +95,38 @@ function createValue(targ) {
   operatorCount++;
 }
 
-
+// CLICK EVENT ON ENTIRE CALCULATOR, LEVERAGING EVENT BUBBLING
 container.addEventListener('click', function(evt) {
 
   let target = evt.target;
 
+  // ADD CLICK SOUND
   if (target.classList.contains('click-sound')) {
     audio.play();
   }
 
+  // PRINT NUMBER TO SCREEN
   if (target.classList.contains('number')) {
 
     updateAnswer(target);
 
+    // OPERATOR TO ARRAY
   } else if (target.classList.contains('operator')) {
 
       createValue(target);
       numCount++;
 
+      // SQ-ROOT DOES NOT UPDATE numCount
   } else if (target.classList.contains('sq-root')) {
 
       createValue(target);
 
+      // CLEAR BUTTON
   } else if (target.classList.contains('clear')) {
 
     setZero();
 
+    // SCROLLS BACK THROUGH ANSWERS
   } else if (target.classList.contains('left-arrow')) {
 
     if (allTotalsCount > 0) {
@@ -124,6 +134,7 @@ container.addEventListener('click', function(evt) {
     }
     answer.textContent = allTotals[allTotalsCount];
 
+    // SCROLLS FORWARD THROUGH ANSWERS
   } else if (target.classList.contains('right-arrow')) {
 
     if (allTotalsCount < allTotals.length) {
@@ -131,10 +142,12 @@ container.addEventListener('click', function(evt) {
     }
     answer.textContent = allTotals[allTotalsCount];
 
+    // GET ANSWER
   } else if (target.classList.contains('equals')) {
 
     value[numCount] = Number(ansStr);
 
+    // RUN CALCULATIONS
     function calculate() {
 
       let sqRootIndex = operators.indexOf("\u221A");
