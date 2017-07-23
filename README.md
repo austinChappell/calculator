@@ -1,3 +1,13 @@
+# Project Title
+
+Week-Four-Project
+
+## Project Description
+
+This is a project from The Iron Yard demonstrating our ability to manipulate the DOM, use functions, event bubbling, and flex-box.
+
+### Things to know
+
 This calculator app uses a variety of functions. Initially many variables are declared and/or assigned to zero values. Each operation has it's own mini-function, with the exception of the square root function, since square root only needs one value to execute. The mini-functions are passed into a mega-function which executes the rest of the equation.
 
 Order of operations is achieved with this calculator. Square roots run first, then multiplication, division, and modulo reading left-to-right. Technically multi/div do not read left to read necessarily in this app, but that does not change the result. However, modulo does need to be executed in accordance to its position relative to multiplication and division operators. Addition and subtraction run last.
