@@ -1,3 +1,4 @@
+// ZERO VALUES
 let total = 0;
 let ansStr = '';
 let value = [];
@@ -12,6 +13,7 @@ let container = document.querySelector('.container');
 let answer = document.querySelector('#answer h2');
 let audio = document.querySelector('audio');
 
+// FUNCTION USED FOR SQUARE ROOT
 function sqRoot(index) {
 
   subTotal = Math.sqrt(value[index]);
@@ -139,6 +141,7 @@ container.addEventListener('click', function(evt) {
         sqRoot(sqRootIndex);
       }
 
+      // THESE ELEMENTS ARE DEFINED FOLLOWING THE SQUARE ROOT CALCULATION
       let timesIndex = operators.indexOf('x');
       let divideIndex = operators.indexOf('/');
       let addIndex = operators.indexOf('+');
@@ -148,6 +151,7 @@ container.addEventListener('click', function(evt) {
       let isModuloBeforeDivide;
       let isModuloFirst;
 
+      // MODULO IS EQUAL IN ORDER OF OPERATIONS TO MULTI. AND DIV., BUT MUST BE EXECUTED ONLY IF IT COMES BEFORE MULTI. AND DIV.
       if ((moduloIndex !== -1 && moduloIndex < timesIndex) || (moduloIndex !== -1 && timesIndex === -1)) {
         isModuloBeforeTimes = true;
       }

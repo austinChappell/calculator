@@ -1,6 +1,4 @@
-# Project Title
-
-Week-Four-Project
+# Calculator Project
 
 ## Project Description
 
